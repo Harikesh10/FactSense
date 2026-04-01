@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FactSense — Smart Industrial IIoT Platform</title>
+  <meta name="description" content="FactSense is a cutting-edge Industrial IoT platform for real-time machine monitoring, sensor analytics, and predictive maintenance." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <link rel="stylesheet" href="css/landing.css" />
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+
+    <a class="nav-brand" href="#home" id="nav-logo">
+      <div class="brand-chip">
+        <i data-lucide="cpu" class="chip-icon"></i>
+      </div>
+      <span class="brand-text">Fact<span class="brand-accent">Sense</span></span>
+    </a>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home"     class="nav-link active" data-section="home">Home</a></li>
+      <li><a href="#about"    class="nav-link"        data-section="about">About</a></li>
+      <li><a href="#features" class="nav-link"        data-section="features">Features</a></li>
+    </ul>
+
+    <a href="dashboard.html" class="nav-cta" id="nav-dashboard-btn">
+      <i data-lucide="layout-dashboard" class="cta-icon"></i>
+      Open Dashboard
+    </a>
+
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#home"     class="mobile-link">Home</a>
+    <a href="#about"    class="mobile-link">About</a>
+    <a href="#features" class="mobile-link">Features</a>
+    <a href="dashboard.html" class="mobile-cta">Open Dashboard</a>
+  </div>
+</nav>
+
+<!-- ===================== HOME / HERO ===================== -->
+<section class="section hero-section" id="home">
+
+  <!-- Animated background grid -->
+  <div class="hero-bg-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+
+  <div class="hero-inner">
+
+    <!-- LEFT: IIoT Animation -->
+    <div class="hero-left" id="hero-left">
+      <div class="iiot-visual">
+
+        <!-- Central machine node -->
+        <div class="iiot-core">
+          <div class="core-ring core-ring-1"></div>
+          <div class="core-ring core-ring-2"></div>
+          <div class="core-ring core-ring-3"></div>
+          <div class="core-center">
+            <i data-lucide="cpu" class="core-icon"></i>
+          </div>
+        </div>
+
+
+
+        <!-- Status ticker at bottom -->
+        <div class="status-ticker">
+          <span class="ticker-dot"></span>
+          <span class="ticker-text" id="ticker-text">All systems nominal — 5 machines online</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Hero Content -->
+    <div class="hero-right" id="hero-right">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Industrial IoT Platform
+      </div>
+
+      <h1 class="hero-heading">
+        Smart<br />
+        <span class="heading-gradient">Industrial</span><br />
+        Monitoring
+      </h1>
+
+      <p class="hero-sub">
+        Real-time visibility into machine temperature, vibration, gas levels, and operational health — all in one intelligent dashboard.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section about-section" id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <div class="section-eyebrow">
+        <i data-lucide="info" class="eyebrow-icon"></i>
+        About FactSense
+      </div>
+      <h2 class="section-heading">
+        Built for the <br><span class="heading-gradient">Future of Industry</span>
+      </h2>
+    </div>
+    <div class="about-right">
+      <p class="about-desc">
+        FactSense is an end-to-end Industrial IoT monitoring platform designed to give engineers and plant managers real-time insight into the operational status of every machine on the floor.
+      </p>
+      <p class="about-desc">
+        From temperature and vibration to gas levels and electrical current — every sensor is connected, every anomaly is caught, and every decision is backed by live data.
+      </p>
+      <p class="about-desc">
+        Our intelligent dashboard leverages multi-sensor correlation to detect patterns, allowing you to move beyond reactive repairs and proactively plan maintenance schedules.
+      </p>
+      <a href="dashboard.html" class="btn-primary" id="about-dashboard-btn">
+        <i data-lucide="layout-dashboard"></i>
+        Try the Dashboard
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="section features-section" id="features">
+
+  <div class="features-bg"></div>
+
+  <div class="features-inner">
+
+    <div class="features-header">
+      <div class="section-eyebrow">
+        <i data-lucide="sparkles" class="eyebrow-icon"></i>
+        Key Features
+      </div>
+      <h2 class="section-heading">
+        Everything you need to<br /><span class="heading-gradient">Monitor Smarter</span>
+      </h2>
+      <p class="features-sub">Six powerful capabilities pinned right to your workflow.</p>
+    </div>
+
+    <!-- Feature boxes -->
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap yellow">
+          <i data-lucide="activity" class="feature-icon"></i>
+        </div>
+        <h3 class="feature-title">Real-Time Monitoring</h3>
+        <p class="feature-body">Track machine health and performance metrics instantly via live WebSocket data streams.</p>
+        <div class="feature-tag">Live</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap blue">
+          <i data-lucide="bar-chart-3" class="feature-icon"></i>
+        </div>
+        <h3 class="feature-title">Sensor Analytics</h3>
+        <p class="feature-body">Visualize temperature, vibration, noise, gas, and current data with beautiful charts.</p>
+        <div class="feature-tag">Analytics</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap pink">
+          <i data-lucide="bell-ring" class="feature-icon"></i>
+        </div>
+        <h3 class="feature-title">Smart Alerts</h3>
+        <p class="feature-body">Instant threshold-based alerts identify dangerous machine conditions before they escalate.</p>
+        <div class="feature-tag">Safety</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap green">
+          <i data-lucide="shield-check" class="feature-icon"></i>
+        </div>
+        <h3 class="feature-title">Predictive Health</h3>
+        <p class="feature-body">Multi-sensor correlation detects anomalies early so you can plan maintenance proactively.</p>
+        <div class="feature-tag">AI-Assisted</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap purple">
+          <i data-lucide="toggle-right" class="feature-icon"></i>
+        </div>
+        <h3 class="feature-title">Sensor Control</h3>
+        <p class="feature-body">Toggle individual sensors on/off directly from the dashboard with instant feedback.</p>
+        <div class="feature-tag">Control</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap orange">
+          <i data-lucide="gauge" class="feature-icon"></i>
+        </div>
+        <h3 class="feature-title">Machine Simulator</h3>
+        <p class="feature-body">Built-in machine simulator lets you test the entire platform without physical hardware.</p>
+        <div class="feature-tag">Dev Tool</div>
+      </div>
+
+    </div>
+
+    <div class="features-cta">
+      <a href="dashboard.html" class="btn-primary" id="features-dashboard-btn">
+        <i data-lucide="layout-dashboard"></i>
+        Launch Dashboard
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer-section" id="footer">
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <div class="brand-chip">
+        <i data-lucide="cpu" class="chip-icon"></i>
+      </div>
+      <span class="brand-text">Fact<span class="brand-accent">Sense</span></span>
+    </div>
+
+    <p class="footer-tagline">Industrial intelligence, delivered in real time.</p>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+      <span>© 2026 FactSense. All rights reserved.</span>
+      <span class="footer-live">
+        <span class="ticker-dot"></span>
+        System Online
+      </span>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/landing.js"></script>
+<script>
+  // Init Lucide icons
+  lucide.createIcons();
+</script>
+</body>
+</html>

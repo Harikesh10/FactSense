@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FactSense Dashboard</title>
+<meta name="description" content="FactSense industrial IoT dashboard — live sensor monitoring and machine control">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-body">
+
+<!-- TOPBAR -->
+<nav class="dash-topbar">
+  <div class="topbar-left">
+    <div class="live-dot-anim"></div>
+    <span class="brand-mono">FactSense<span class="brand-slash">/</span>MONITOR</span>
+  </div>
+
+  <div class="topbar-center">
+    <select id="machineSelector" class="machine-select">
+      <option value="MACHINE_1">Machine 1</option>
+      <option value="MACHINE_2">Machine 2</option>
+      <option value="MACHINE_3">Machine 3</option>
+    </select>
+  </div>
+
+  <div class="topbar-right">
+    <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+    <span class="clock-mono" id="clock">--:--:--</span>
+
+    <!-- Machine Status (moved here from the grid) -->
+    <div class="topbar-status-card" id="topbar-status-card">
+      <div class="tscard-indicator" id="statusIndicator"></div>
+      <div class="tscard-info">
+        <div class="tscard-label">MACHINE STATUS</div>
+        <div class="tscard-value" id="status">—</div>
+      </div>
+      <span class="sc-icon tscard-icon">🏭</span>
+    </div>
+
+    <a href="index.html" class="back-link">← Home</a>
+  </div>
+</nav>
+
+<!-- PAGE WRAPPER: sidebar + main -->
+<div class="page-wrapper">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Machine power switch -->
+    <div class="sidebar-section sim-section">
+      <div class="sidebar-section-label">SIMULATOR</div>
+      <div class="sim-toggle-row">
+        <span class="sim-label" id="simLabel">OFF</span>
+        <label class="toggle-switch" for="simToggle" title="Start / Stop sensor simulator">
+          <input type="checkbox" id="simToggle">
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+          </span>
+        </label>
+      </div>
+      <div class="sim-status-text" id="simStatusText">Simulator idle</div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Sensor navigation buttons -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">SENSORS</div>
+      <div class="sensor-nav">
+
+        <!-- Temperature -->
+        <div class="sensor-item">
+          <button class="sensor-btn active" id="btn-temp" data-target="card-temp">
+            <span class="sensor-btn-icon">🌡️</span>
+            <span class="sensor-btn-name">Temperature</span>
+            <span class="sensor-btn-val" id="sval-temp">--</span>
+          </button>
+          <div class="sensor-power-pair">
+            <button class="spp-btn spp-on active" id="power-on-temp" data-sensor="temp" data-action="on">ON</button>
+            <button class="spp-btn spp-off" id="power-off-temp" data-sensor="temp" data-action="off">OFF</button>
+          </div>
+        </div>
+
+        <!-- Vibration -->
+        <div class="sensor-item">
+          <button class="sensor-btn" id="btn-vib" data-target="card-vib">
+            <span class="sensor-btn-icon">📳</span>
+            <span class="sensor-btn-name">Vibration</span>
+            <span class="sensor-btn-val" id="sval-vib">--</span>
+          </button>
+          <div class="sensor-power-pair">
+            <button class="spp-btn spp-on active" id="power-on-vib" data-sensor="vib" data-action="on">ON</button>
+            <button class="spp-btn spp-off" id="power-off-vib" data-sensor="vib" data-action="off">OFF</button>
+          </div>
+        </div>
+
+        <!-- Noise -->
+        <div class="sensor-item">
+          <button class="sensor-btn" id="btn-noise" data-target="card-noise">
+            <span class="sensor-btn-icon">🔊</span>
+            <span class="sensor-btn-name">Noise Level</span>
+            <span class="sensor-btn-val" id="sval-noise">--</span>
+          </button>
+          <div class="sensor-power-pair">
+            <button class="spp-btn spp-on active" id="power-on-noise" data-sensor="noise" data-action="on">ON</button>
+            <button class="spp-btn spp-off" id="power-off-noise" data-sensor="noise" data-action="off">OFF</button>
+          </div>
+        </div>
+
+        <!-- Gas -->
+        <div class="sensor-item">
+          <button class="sensor-btn" id="btn-gas" data-target="card-gas">
+            <span class="sensor-btn-icon">☁️</span>
+            <span class="sensor-btn-name">Gas / AQI</span>
+            <span class="sensor-btn-val" id="sval-gas">--</span>
+          </button>
+          <div class="sensor-power-pair">
+            <button class="spp-btn spp-on active" id="power-on-gas" data-sensor="gas" data-action="on">ON</button>
+            <button class="spp-btn spp-off" id="power-off-gas" data-sensor="gas" data-action="off">OFF</button>
+          </div>
+        </div>
+
+        <!-- Current -->
+        <div class="sensor-item">
+          <button class="sensor-btn" id="btn-current" data-target="card-current">
+            <span class="sensor-btn-icon">⚡</span>
+            <span class="sensor-btn-name">Current</span>
+            <span class="sensor-btn-val" id="sval-current">--</span>
+          </button>
+          <div class="sensor-power-pair">
+            <button class="spp-btn spp-on active" id="power-on-current" data-sensor="current" data-action="on">ON</button>
+            <button class="spp-btn spp-off" id="power-off-current" data-sensor="current" data-action="off">OFF</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Machine hint from status -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">SYSTEM HINT</div>
+      <div class="status-hint-side" id="statusHint">Awaiting data…</div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="dash-main">
+
+    <div class="section-hdr">Live Sensor Reading</div>
+
+    <div class="sensor-grid">
+
+      <!-- Temperature -->
+      <div class="sensor-card" id="card-temp">
+        <div class="sc-top">
+          <span class="sc-name">Temperature</span>
+          <span class="sc-icon">🌡️</span>
+        </div>
+        <div class="sc-val-row">
+          <span class="sc-val" id="temperature" style="color:#f59e0b">--</span>
+          <span class="sc-unit">°C</span>
+        </div>
+        <div class="sc-status-row">
+          <span class="sc-thresh">Threshold: 70°C</span>
+          <span class="status-pill" id="pill-temp">—</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-temp" style="background:#f59e0b;width:0%"></div></div>
+        <div class="prog-labs"><span>0</span><span id="pct-temp">0%</span><span>100°C</span></div>
+      </div>
+
+      <!-- Vibration -->
+      <div class="sensor-card" id="card-vib">
+        <div class="sc-top">
+          <span class="sc-name">Vibration</span>
+          <span class="sc-icon">📳</span>
+        </div>
+        <div class="sc-val-row">
+          <span class="sc-val" id="vibration" style="color:#10b981">--</span>
+          <span class="sc-unit">mm/s</span>
+        </div>
+        <div class="sc-status-row">
+          <span class="sc-thresh">Threshold: 65 mm/s</span>
+          <span class="status-pill" id="pill-vib">—</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-vib" style="background:#10b981;width:0%"></div></div>
+        <div class="prog-labs"><span>0</span><span id="pct-vib">0%</span><span>100</span></div>
+      </div>
+
+      <!-- Noise -->
+      <div class="sensor-card" id="card-noise">
+        <div class="sc-top">
+          <span class="sc-name">Noise Level</span>
+          <span class="sc-icon">🔊</span>
+        </div>
+        <div class="sc-val-row">
+          <span class="sc-val" id="noise" style="color:#f97316">--</span>
+          <span class="sc-unit">dB</span>
+        </div>
+        <div class="sc-status-row">
+          <span class="sc-thresh">Threshold: 65 dB</span>
+          <span class="status-pill" id="pill-noise">—</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-noise" style="background:#f97316;width:0%"></div></div>
+        <div class="prog-labs"><span>0</span><span id="pct-noise">0%</span><span>100 dB</span></div>
+      </div>
+
+      <!-- Gas -->
+      <div class="sensor-card" id="card-gas">
+        <div class="sc-top">
+          <span class="sc-name">Gas / AQI</span>
+          <span class="sc-icon">☁️</span>
+        </div>
+        <div class="sc-val-row">
+          <span class="sc-val" id="gas" style="color:#ef4444">--</span>
+          <span class="sc-unit">ppm</span>
+        </div>
+        <div class="sc-status-row">
+          <span class="sc-thresh">Threshold: 35 ppm</span>
+          <span class="status-pill" id="pill-gas">—</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-gas" style="background:#ef4444;width:0%"></div></div>
+        <div class="prog-labs"><span>0</span><span id="pct-gas">0%</span><span>60 ppm</span></div>
+      </div>
+
+      <!-- Current -->
+      <div class="sensor-card" id="card-current">
+        <div class="sc-top">
+          <span class="sc-name">Current</span>
+          <span class="sc-icon">⚡</span>
+        </div>
+        <div class="sc-val-row">
+          <span class="sc-val" id="current" style="color:#8b5cf6">--</span>
+          <span class="sc-unit">A</span>
+        </div>
+        <div class="sc-status-row">
+          <span class="sc-thresh">Threshold: 14A</span>
+          <span class="status-pill" id="pill-current">—</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-current" style="background:#8b5cf6;width:0%"></div></div>
+        <div class="prog-labs"><span>0</span><span id="pct-current">0%</span><span>20A</span></div>
+      </div>
+
+    </div><!-- /sensor-grid -->
+
+  </div><!-- /dash-main -->
+
+</div><!-- /page-wrapper -->
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
