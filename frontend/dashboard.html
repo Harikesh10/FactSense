@@ -79,8 +79,8 @@
             <span class="sensor-btn-val" id="sval-temp">--</span>
           </button>
           <div class="sensor-power-pair">
-            <button class="spp-btn spp-on active" id="power-on-temp" data-sensor="temp" data-action="on">ON</button>
-            <button class="spp-btn spp-off" id="power-off-temp" data-sensor="temp" data-action="off">OFF</button>
+            <button class="spp-btn spp-on" id="power-on-temp" data-sensor="temp" data-action="on">ON</button>
+            <button class="spp-btn spp-off active" id="power-off-temp" data-sensor="temp" data-action="off">OFF</button>
           </div>
         </div>
 
@@ -92,8 +92,8 @@
             <span class="sensor-btn-val" id="sval-vib">--</span>
           </button>
           <div class="sensor-power-pair">
-            <button class="spp-btn spp-on active" id="power-on-vib" data-sensor="vib" data-action="on">ON</button>
-            <button class="spp-btn spp-off" id="power-off-vib" data-sensor="vib" data-action="off">OFF</button>
+            <button class="spp-btn spp-on" id="power-on-vib" data-sensor="vib" data-action="on">ON</button>
+            <button class="spp-btn spp-off active" id="power-off-vib" data-sensor="vib" data-action="off">OFF</button>
           </div>
         </div>
 
@@ -105,8 +105,8 @@
             <span class="sensor-btn-val" id="sval-noise">--</span>
           </button>
           <div class="sensor-power-pair">
-            <button class="spp-btn spp-on active" id="power-on-noise" data-sensor="noise" data-action="on">ON</button>
-            <button class="spp-btn spp-off" id="power-off-noise" data-sensor="noise" data-action="off">OFF</button>
+            <button class="spp-btn spp-on" id="power-on-noise" data-sensor="noise" data-action="on">ON</button>
+            <button class="spp-btn spp-off active" id="power-off-noise" data-sensor="noise" data-action="off">OFF</button>
           </div>
         </div>
 
@@ -118,8 +118,8 @@
             <span class="sensor-btn-val" id="sval-gas">--</span>
           </button>
           <div class="sensor-power-pair">
-            <button class="spp-btn spp-on active" id="power-on-gas" data-sensor="gas" data-action="on">ON</button>
-            <button class="spp-btn spp-off" id="power-off-gas" data-sensor="gas" data-action="off">OFF</button>
+            <button class="spp-btn spp-on" id="power-on-gas" data-sensor="gas" data-action="on">ON</button>
+            <button class="spp-btn spp-off active" id="power-off-gas" data-sensor="gas" data-action="off">OFF</button>
           </div>
         </div>
 
@@ -131,8 +131,8 @@
             <span class="sensor-btn-val" id="sval-current">--</span>
           </button>
           <div class="sensor-power-pair">
-            <button class="spp-btn spp-on active" id="power-on-current" data-sensor="current" data-action="on">ON</button>
-            <button class="spp-btn spp-off" id="power-off-current" data-sensor="current" data-action="off">OFF</button>
+            <button class="spp-btn spp-on" id="power-on-current" data-sensor="current" data-action="on">ON</button>
+            <button class="spp-btn spp-off active" id="power-off-current" data-sensor="current" data-action="off">OFF</button>
           </div>
         </div>
 
@@ -157,13 +157,13 @@
     <div class="sensor-grid">
 
       <!-- Temperature -->
-      <div class="sensor-card" id="card-temp">
+      <div class="sensor-card" id="card-temp" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Temperature</span>
           <span class="sc-icon">🌡️</span>
         </div>
         <div class="sc-val-row">
-          <span class="sc-val" id="temperature" style="color:#f59e0b">--</span>
+          <span class="sc-val" id="temperature" style="color:#f59e0b; opacity:0.4;">--</span>
           <span class="sc-unit">°C</span>
         </div>
         <div class="sc-status-row">
@@ -175,13 +175,13 @@
       </div>
 
       <!-- Vibration -->
-      <div class="sensor-card" id="card-vib">
+      <div class="sensor-card" id="card-vib" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Vibration</span>
           <span class="sc-icon">📳</span>
         </div>
         <div class="sc-val-row">
-          <span class="sc-val" id="vibration" style="color:#10b981">--</span>
+          <span class="sc-val" id="vibration" style="color:#10b981; opacity:0.4;">--</span>
           <span class="sc-unit">mm/s</span>
         </div>
         <div class="sc-status-row">
@@ -193,13 +193,13 @@
       </div>
 
       <!-- Noise -->
-      <div class="sensor-card" id="card-noise">
+      <div class="sensor-card" id="card-noise" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Noise Level</span>
           <span class="sc-icon">🔊</span>
         </div>
         <div class="sc-val-row">
-          <span class="sc-val" id="noise" style="color:#f97316">--</span>
+          <span class="sc-val" id="noise" style="color:#f97316; opacity:0.4;">--</span>
           <span class="sc-unit">dB</span>
         </div>
         <div class="sc-status-row">
@@ -211,13 +211,13 @@
       </div>
 
       <!-- Gas -->
-      <div class="sensor-card" id="card-gas">
+      <div class="sensor-card" id="card-gas" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Gas / AQI</span>
           <span class="sc-icon">☁️</span>
         </div>
         <div class="sc-val-row">
-          <span class="sc-val" id="gas" style="color:#ef4444">--</span>
+          <span class="sc-val" id="gas" style="color:#ef4444; opacity:0.4;">--</span>
           <span class="sc-unit">ppm</span>
         </div>
         <div class="sc-status-row">
@@ -229,13 +229,13 @@
       </div>
 
       <!-- Current -->
-      <div class="sensor-card" id="card-current">
+      <div class="sensor-card" id="card-current" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Current</span>
           <span class="sc-icon">⚡</span>
         </div>
         <div class="sc-val-row">
-          <span class="sc-val" id="current" style="color:#8b5cf6">--</span>
+          <span class="sc-val" id="current" style="color:#8b5cf6; opacity:0.4;">--</span>
           <span class="sc-unit">A</span>
         </div>
         <div class="sc-status-row">
