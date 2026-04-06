@@ -18,9 +18,9 @@ function generateSensorData() {
 
         return {
             machine_id: getRandomMachine(),
-            temperature: round2(35 + Math.random() * 10),
-            vibration: round2(20 + Math.random() * 10),
-            noise: round2(30 + Math.random() * 10),
+            temperature: round2(35 + Math.random() * 8),
+            vibration: round2(20 + Math.random() * 8),
+            noise: round2(30 + Math.random() * 8),
             current: round2(5 + Math.random() * 3),
             gas: round2(5 + Math.random() * 5)
         };
@@ -44,8 +44,8 @@ function generateSensorData() {
 
         return {
             machine_id: getRandomMachine(),
-            temperature: 75 + round2(Math.random() * 10),
-            vibration: 75 + round2(Math.random() * 10),
+            temperature: 75 + round2(Math.random() * 15),
+            vibration: 75 + round2(Math.random() * 20),
             noise: 70 + round2(Math.random() * 10),
             current: 12 + round2(Math.random() * 5),
             gas: 40 + round2(Math.random() * 20)
