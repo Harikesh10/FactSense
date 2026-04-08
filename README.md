@@ -1,4 +1,4 @@
-# 🤖 FactSense — Smart Industrial IIoT Platform
+#  FactSense — Smart Industrial IIoT Platform
 
 Welcome to **FactSense**! This is a super cool dashboard that helps people watch over big factory machines to make sure they are working perfectly. 
 
@@ -6,7 +6,7 @@ Imagine you have a giant robot friend, and you want to make sure its heart is be
 
 ---
 
-## 🌟 What can it do? (Features)
+##  What can it do? (Features)
 
 We made this so simple even a kid can use it! Here is what's inside:
 
@@ -34,7 +34,7 @@ Follow these simple steps:
 
 ---
 
-## 🚀 How to run it
+##  How to run it
 
 This project has two parts: the **Brain** (Backend) and the **Face** (Frontend).
 
@@ -71,7 +71,7 @@ The face is what you see and click on.
 
 ---
 
-## 📁 What's inside? (Project Structure)
+##  What's inside? (Project Structure)
 
 Here is where we keep all the files:
 
@@ -81,7 +81,7 @@ Here is where we keep all the files:
 
 ---
 
-## 🎨 Technology We Used
+##  Technology We Used
 
 *   **Frontend**: HTML, CSS (Very pretty!), and Vanilla JavaScript.
 *   **Backend**: Node.js and Express.
