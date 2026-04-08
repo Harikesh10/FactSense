@@ -10,12 +10,12 @@ Imagine you have a giant robot friend, and you want to make sure its heart is be
 
 We made this so simple even a kid can use it! Here is what's inside:
 
-*    Magic Machine Watcher**: See exactly what the machines are doing right this second. No waiting!
-*    Pretty Pictures**: Instead of boring numbers, we use colorful charts. It's like a storybook for machine health!
-*    Super Safety Alarms**: If a machine gets too hot or starts shaking too much, the dashboard screams "Look at me!" so you can fix it.
-*    Smart Fortune Teller**: Our smart computer logic can guess if a machine might break *before* it actually does. That's like seeing into the future!
-*    Remote Control**: You get big buttons to turn machine sensors on and off, just like a TV remote or a video game.
-*    Pretend Machine**: Don't have a real factory? No problem! We have a "Simulator" that pretends to be a machine so you can play with the dashboard anytime.
+*    Magic Machine Watcher: See exactly what the machines are doing right this second. No waiting!
+*    Pretty Pictures: Instead of boring numbers, we use colorful charts. It's like a storybook for machine health!
+*    Super Safety Alarms: If a machine gets too hot or starts shaking too much, the dashboard screams "Look at me!" so you can fix it.
+*    Smart Fortune Teller: Our smart computer logic can guess if a machine might break *before* it actually does. That's like seeing into the future!
+*    Remote Control: You get big buttons to turn machine sensors on and off, just like a TV remote or a video game.
+*    Pretend Machine: Don't have a real factory? No problem! We have a "Simulator" that pretends to be a machine so you can play with the dashboard anytime.
 
 ---
 
