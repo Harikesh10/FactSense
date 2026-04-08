@@ -19,7 +19,7 @@ We made this so simple even a kid can use it! Here is what's inside:
 
 ---
 
-## 🛠️ How to get the code on your computer
+##  How to get the code on your computer
 
 Follow these simple steps:
 
@@ -90,4 +90,3 @@ Here is where we keep all the files:
 
 ---
 
-Made with ❤️ for the future of industry.
