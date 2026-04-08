@@ -1,4 +1,4 @@
-# 🚀 FactSense — Smart Industrial IIoT Platform
+# 🤖 FactSense — Smart Industrial IIoT Platform
 
 Welcome to **FactSense**! This is a super cool dashboard that helps people watch over big factory machines to make sure they are working perfectly. 
 
