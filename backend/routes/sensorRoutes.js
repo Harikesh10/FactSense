@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const SensorData = require("../models/sensorData");
+const sendSMS = require("../utils/twilio");
+
+let lastAlertTime = 0;
+const COOLDOWN = 2 * 60 * 1000; // 2 minutes
 
 
 // Delete oldest 50 records when total count reaches 100
@@ -40,6 +44,40 @@ router.post("/", async (req, res) => {
 
         await cleanupOldRecords();
 
+        // 🚨 THRESHOLD VALUES (you can tune these)
+        const TEMP_THRESHOLD = 80;
+        const VIB_THRESHOLD = 50;
+        const NOISE_THRESHOLD = 70;
+        const CURRENT_THRESHOLD = 10;
+        const GAS_THRESHOLD = 300;
+
+        const now = Date.now();
+
+        // 🚨 ALERT LOGIC WITH COOLDOWN
+        if (
+            (
+                temperature > TEMP_THRESHOLD ||
+                vibration > VIB_THRESHOLD ||
+                noise > NOISE_THRESHOLD ||
+                current > CURRENT_THRESHOLD ||
+                gas > GAS_THRESHOLD
+            ) &&
+            (now - lastAlertTime > COOLDOWN)
+        ) {
+            await sendSMS(
+                `⚠️ ALERT!
+Machine: ${machine_id}
+
+Temp: ${temperature}
+Vibration: ${vibration}
+Noise: ${noise}
+Current: ${current}
+Gas: ${gas}`
+            );
+
+            lastAlertTime = now;
+        }
+
         res.json({
             message: "Sensor data saved successfully",
             data: newData
@@ -51,7 +89,6 @@ router.post("/", async (req, res) => {
 
     }
 });
-
 
 // GET latest sensor data
 router.get("/latest", async (req, res) => {
