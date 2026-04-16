@@ -29,7 +29,7 @@ async function cleanupOldRecords() {
 router.post("/", async (req, res) => {
     try {
 
-        const { machine_id, temperature, vibration, noise, current, gas } = req.body;
+        const { machine_id, temperature, vibration, noise, current, gas, load } = req.body;
 
         const newData = new SensorData({
             machine_id,
@@ -37,7 +37,8 @@ router.post("/", async (req, res) => {
             vibration,
             noise,
             current,
-            gas
+            gas,
+            load
         });
 
         await newData.save();
@@ -50,6 +51,7 @@ router.post("/", async (req, res) => {
         const NOISE_THRESHOLD = 70;
         const CURRENT_THRESHOLD = 10;
         const GAS_THRESHOLD = 300;
+        const LOAD_THRESHOLD = 40;
 
         const now = Date.now();
 
@@ -60,7 +62,8 @@ router.post("/", async (req, res) => {
                 vibration > VIB_THRESHOLD ||
                 noise > NOISE_THRESHOLD ||
                 current > CURRENT_THRESHOLD ||
-                gas > GAS_THRESHOLD
+                gas > GAS_THRESHOLD ||
+                load > LOAD_THRESHOLD
             ) &&
             (now - lastAlertTime > COOLDOWN)
         ) {
@@ -72,7 +75,8 @@ Temp: ${temperature}
 Vibration: ${vibration}
 Noise: ${noise}
 Current: ${current}
-Gas: ${gas}`
+Gas: ${gas}
+Load: ${load}`
             );
 
             lastAlertTime = now;

@@ -75,19 +75,19 @@ async function syncSimulatorState() {
     updateSimUI(running);
 
     if (running) {
-       ['temp', 'vib', 'noise', 'gas', 'current'].forEach(s => {
+       ['temp', 'vib', 'noise', 'gas', 'current', 'load'].forEach(s => {
          const stored = localStorage.getItem(`sensor_power_${s}`);
          setSensorPower(s, stored !== null ? stored === 'true' : true, false);
        });
     } else {
-       ['temp', 'vib', 'noise', 'gas', 'current'].forEach(s => setSensorPower(s, false, false));
+       ['temp', 'vib', 'noise', 'gas', 'current', 'load'].forEach(s => setSensorPower(s, false, false));
     }
   } catch (_) {
     simStatus.textContent = 'Backend offline';
     const simStored = localStorage.getItem('simulator_running') === 'true';
     simToggle.checked = simStored;
     updateSimUI(simStored);
-    ['temp', 'vib', 'noise', 'gas', 'current'].forEach(s => {
+    ['temp', 'vib', 'noise', 'gas', 'current', 'load'].forEach(s => {
       const stored = localStorage.getItem(`sensor_power_${s}`);
       setSensorPower(s, stored !== null ? stored === 'true' : false, false);
     });
@@ -111,14 +111,14 @@ simToggle.addEventListener('change', async () => {
     if (running) {
       await startSimulator();
       // When explicitly turning on the simulator, apply stored sensor preferences or default to true
-      ['temp', 'vib', 'noise', 'gas', 'current'].forEach(s => {
+      ['temp', 'vib', 'noise', 'gas', 'current', 'load'].forEach(s => {
          const stored = localStorage.getItem(`sensor_power_${s}`);
          setSensorPower(s, stored !== null ? stored === 'true' : true, true);
       });
     } else {
       await stopSimulator();
       // Visually shut off without overwriting their individual stored states
-      ['temp', 'vib', 'noise', 'gas', 'current'].forEach(s => setSensorPower(s, false, false));
+      ['temp', 'vib', 'noise', 'gas', 'current', 'load'].forEach(s => setSensorPower(s, false, false));
     }
     updateSimUI(running);
   } catch (_) {

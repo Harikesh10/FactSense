@@ -105,6 +105,7 @@
     'Vibration: 3.2g — Normal operation',
     'Gas Level: 82ppm — Monitoring closely',
     'Current Draw: 14A — Optimal efficiency',
+    'Load Sensor: 25kg — Within capacity',
     'Uptime: 99.9% — 12 days continuous',
   ];
 
@@ -178,6 +179,7 @@
     vib:     { el: null, base: 3.2, range: 0.8, unit: 'g',  key: 'node-vib'  },
     gas:     { el: null, base: 82,  range: 8,  unit: 'ppm', key: 'node-gas'  },
     current: { el: null, base: 14,  range: 2,  unit: 'A',   key: 'node-cur'  },
+    load:    { el: null, base: 25,  range: 5,  unit: 'kg',  key: 'node-load' },
   };
 
   // Grab val spans within orbit nodes
@@ -190,6 +192,7 @@
     if (label === 'vib')     sensorValues.vib.el     = valEl;
     if (label === 'gas')     sensorValues.gas.el     = valEl;
     if (label === 'current') sensorValues.current.el = valEl;
+    if (label === 'load')    sensorValues.load.el    = valEl;
   });
 
   function jitter(base, range) {

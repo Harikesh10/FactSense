@@ -9,7 +9,8 @@ const COLORS = {
   vib:     '#10b981',
   noise:   '#f97316',
   gas:     '#ef4444',
-  current: '#8b5cf6'
+  current: '#8b5cf6',
+  load:    '#9ca3af'
 };
 
 /* ── SPARKLINES (per-sensor trend line inside each card) ── */

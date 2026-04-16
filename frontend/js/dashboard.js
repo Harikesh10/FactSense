@@ -9,6 +9,7 @@ const SENSORS = [
   { key: 'noise',       id: 'noise',   name: 'Noise',       color: '#f97316', min: 0,  max: 100, thresh: 65  },
   { key: 'gas',         id: 'gas',     name: 'Gas / AQI',   color: '#ef4444', min: 0,  max: 60,  thresh: 35  },
   { key: 'current',     id: 'current', name: 'Current',     color: '#8b5cf6', min: 0,  max: 20,  thresh: 14  },
+  { key: 'load',        id: 'load',    name: 'Load',        color: '#9ca3af', min: 0,  max: 100, thresh: 40  },
 ];
 
 SENSORS.forEach(s => s.threshPct = Math.round((s.thresh / s.max) * 100));

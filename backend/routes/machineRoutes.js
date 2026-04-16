@@ -8,7 +8,8 @@ function calculateStatus(data) {
     if (
         data.temperature > 70 ||
         data.vibration > 70 ||
-        data.gas > 40
+        data.gas > 40 ||
+        data.load > 40
     ) {
         return "DANGER";
     }
@@ -16,7 +17,8 @@ function calculateStatus(data) {
     if (
         data.temperature > 50 ||
         data.vibration > 40 ||
-        data.gas > 20
+        data.gas > 20 ||
+        data.load > 25
     ) {
         return "WARNING";
     }

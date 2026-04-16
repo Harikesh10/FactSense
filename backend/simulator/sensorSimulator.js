@@ -22,7 +22,8 @@ function generateSensorData() {
             vibration: round2(20 + Math.random() * 8),
             noise: round2(30 + Math.random() * 8),
             current: round2(5 + Math.random() * 3),
-            gas: round2(5 + Math.random() * 5)
+            gas: round2(5 + Math.random() * 5),
+            load: round2(10 + Math.random() * 5)
         };
 
     }
@@ -35,7 +36,8 @@ function generateSensorData() {
             vibration: round2(45 + Math.random() * 10),
             noise: round2(50 + Math.random() * 10),
             current: round2(8 + Math.random() * 4),
-            gas: round2(20 + Math.random() * 10)
+            gas: round2(20 + Math.random() * 10),
+            load: round2(25 + Math.random() * 10)
         };
 
     }
@@ -48,7 +50,8 @@ function generateSensorData() {
             vibration: 75 + round2(Math.random() * 20),
             noise: 70 + round2(Math.random() * 10),
             current: 12 + round2(Math.random() * 5),
-            gas: 40 + round2(Math.random() * 20)
+            gas: 40 + round2(Math.random() * 20),
+            load: 45 + round2(Math.random() * 15)
         };
 
     }

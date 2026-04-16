@@ -36,7 +36,7 @@
         <div class="tscard-label">MACHINE STATUS</div>
         <div class="tscard-value" id="status">—</div>
       </div>
-      <span class="sc-icon tscard-icon">🏭</span>
+      </div>
     </div>
 
     <a href="index.html" class="back-link">← Home</a>
@@ -74,7 +74,6 @@
         <!-- Temperature -->
         <div class="sensor-item">
           <button class="sensor-btn active" id="btn-temp" data-target="card-temp">
-            <span class="sensor-btn-icon">🌡️</span>
             <span class="sensor-btn-name">Temperature</span>
             <span class="sensor-btn-val" id="sval-temp">--</span>
           </button>
@@ -87,7 +86,6 @@
         <!-- Vibration -->
         <div class="sensor-item">
           <button class="sensor-btn" id="btn-vib" data-target="card-vib">
-            <span class="sensor-btn-icon">📳</span>
             <span class="sensor-btn-name">Vibration</span>
             <span class="sensor-btn-val" id="sval-vib">--</span>
           </button>
@@ -100,7 +98,6 @@
         <!-- Noise -->
         <div class="sensor-item">
           <button class="sensor-btn" id="btn-noise" data-target="card-noise">
-            <span class="sensor-btn-icon">🔊</span>
             <span class="sensor-btn-name">Noise Level</span>
             <span class="sensor-btn-val" id="sval-noise">--</span>
           </button>
@@ -113,7 +110,6 @@
         <!-- Gas -->
         <div class="sensor-item">
           <button class="sensor-btn" id="btn-gas" data-target="card-gas">
-            <span class="sensor-btn-icon">☁️</span>
             <span class="sensor-btn-name">Gas / AQI</span>
             <span class="sensor-btn-val" id="sval-gas">--</span>
           </button>
@@ -126,13 +122,24 @@
         <!-- Current -->
         <div class="sensor-item">
           <button class="sensor-btn" id="btn-current" data-target="card-current">
-            <span class="sensor-btn-icon">⚡</span>
             <span class="sensor-btn-name">Current</span>
             <span class="sensor-btn-val" id="sval-current">--</span>
           </button>
           <div class="sensor-power-pair">
             <button class="spp-btn spp-on" id="power-on-current" data-sensor="current" data-action="on">ON</button>
             <button class="spp-btn spp-off active" id="power-off-current" data-sensor="current" data-action="off">OFF</button>
+          </div>
+        </div>
+
+        <!-- Load -->
+        <div class="sensor-item">
+          <button class="sensor-btn" id="btn-load" data-target="card-load">
+            <span class="sensor-btn-name">Load sensor</span>
+            <span class="sensor-btn-val" id="sval-load">--</span>
+          </button>
+          <div class="sensor-power-pair">
+            <button class="spp-btn spp-on" id="power-on-load" data-sensor="load" data-action="on">ON</button>
+            <button class="spp-btn spp-off active" id="power-off-load" data-sensor="load" data-action="off">OFF</button>
           </div>
         </div>
 
@@ -160,7 +167,6 @@
       <div class="sensor-card" id="card-temp" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Temperature</span>
-          <span class="sc-icon">🌡️</span>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="temperature" style="color:#f59e0b; opacity:0.4;">--</span>
@@ -178,7 +184,6 @@
       <div class="sensor-card" id="card-vib" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Vibration</span>
-          <span class="sc-icon">📳</span>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="vibration" style="color:#10b981; opacity:0.4;">--</span>
@@ -196,7 +201,6 @@
       <div class="sensor-card" id="card-noise" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Noise Level</span>
-          <span class="sc-icon">🔊</span>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="noise" style="color:#f97316; opacity:0.4;">--</span>
@@ -214,7 +218,6 @@
       <div class="sensor-card" id="card-gas" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Gas / AQI</span>
-          <span class="sc-icon">☁️</span>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="gas" style="color:#ef4444; opacity:0.4;">--</span>
@@ -232,7 +235,6 @@
       <div class="sensor-card" id="card-current" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Current</span>
-          <span class="sc-icon">⚡</span>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="current" style="color:#8b5cf6; opacity:0.4;">--</span>
@@ -244,6 +246,23 @@
         </div>
         <div class="prog-track"><div class="prog-fill" id="prog-current" style="background:#8b5cf6;width:0%"></div></div>
         <div class="prog-labs"><span>0</span><span id="pct-current">0%</span><span>20A</span></div>
+      </div>
+
+      <!-- Load -->
+      <div class="sensor-card" id="card-load" style="opacity: 0.35; filter: grayscale(0.7);">
+        <div class="sc-top">
+          <span class="sc-name">Load</span>
+        </div>
+        <div class="sc-val-row">
+          <span class="sc-val" id="load" style="color:#9ca3af; opacity:0.4;">--</span>
+          <span class="sc-unit">kg</span>
+        </div>
+        <div class="sc-status-row">
+          <span class="sc-thresh">Threshold: 40 kg</span>
+          <span class="status-pill" id="pill-load">—</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-load" style="background:#9ca3af;width:0%"></div></div>
+        <div class="prog-labs"><span>0</span><span id="pct-load">0%</span><span>100 kg</span></div>
       </div>
 
     </div><!-- /sensor-grid -->
