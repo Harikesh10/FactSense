@@ -7,18 +7,22 @@ function calculateStatus(data) {
 
     if (
         data.temperature > 70 ||
-        data.vibration > 70 ||
-        data.gas > 40 ||
+        data.vibration > 65 ||
+        data.noise > 65 ||
+        data.current > 14 ||
+        data.gas > 35 ||
         data.load > 40
     ) {
         return "DANGER";
     }
 
     if (
-        data.temperature > 50 ||
-        data.vibration > 40 ||
-        data.gas > 20 ||
-        data.load > 25
+        data.temperature > 55 ||
+        data.vibration > 45 ||
+        data.noise > 50 ||
+        data.current > 10 ||
+        data.gas > 25 ||
+        data.load > 30
     ) {
         return "WARNING";
     }

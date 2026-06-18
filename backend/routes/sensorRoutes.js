@@ -46,11 +46,11 @@ router.post("/", async (req, res) => {
         await cleanupOldRecords();
 
         // 🚨 THRESHOLD VALUES (you can tune these)
-        const TEMP_THRESHOLD = 80;
-        const VIB_THRESHOLD = 50;
-        const NOISE_THRESHOLD = 70;
-        const CURRENT_THRESHOLD = 10;
-        const GAS_THRESHOLD = 300;
+        const TEMP_THRESHOLD = 70;
+        const VIB_THRESHOLD = 65;
+        const NOISE_THRESHOLD = 65;
+        const CURRENT_THRESHOLD = 14;
+        const GAS_THRESHOLD = 35;
         const LOAD_THRESHOLD = 40;
 
         const now = Date.now();

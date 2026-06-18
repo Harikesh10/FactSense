@@ -1,8 +1,5 @@
-/* dashboard.js — wires API data to the dashboard UI */
-
 import { getLatestSensorData, getMachineStatus } from './api.js';
 
-/* ── SENSOR CONFIG ── */
 const SENSORS = [
   { key: 'temperature', id: 'temp',    name: 'Temperature', color: '#f59e0b', min: 0,  max: 100, thresh: 70  },
   { key: 'vibration',   id: 'vib',     name: 'Vibration',   color: '#10b981', min: 0,  max: 100, thresh: 65  },
@@ -14,7 +11,6 @@ const SENSORS = [
 
 SENSORS.forEach(s => s.threshPct = Math.round((s.thresh / s.max) * 100));
 
-/* ── helpers ── */
 function toPct(val, min, max) {
   return Math.min(100, Math.max(0, Math.round(((val - min) / (max - min)) * 100)));
 }
@@ -30,48 +26,54 @@ function setPill(id, status) {
   if (!el) return;
   el.className = 'status-pill';
   const map = { ok: ['pill-ok', 'Normal'], warn: ['pill-warn', 'Warning'], danger: ['pill-danger', 'Danger'] };
-  const [cls, lbl] = map[status] || ['pill-none', '—'];
+  const [cls, lbl] = map[status] || ['pill-none', '--'];
   el.classList.add(cls);
   el.textContent = lbl;
 }
 
-/* ── MAIN POLL: load latest readings ── */
 export async function loadDashboard(machine) {
   const latest = await getLatestSensorData(machine).catch(() => null);
   if (!latest || latest.message) return;
+
+  /* Check sensor power from global (set by main.js) */
+  const powerState = (typeof window !== 'undefined' && window.__sensorPower)
+    ? window.__sensorPower
+    : { temp: true, vib: true, noise: true, gas: true, current: true, load: true };
 
   SENSORS.forEach(s => {
     const val = latest[s.key];
     if (val === undefined || val === null) return;
 
-    /* Big value display */
+    const isPowered = powerState[s.id] !== false;
+
     const el = document.getElementById(s.key);
-    if (el) el.textContent = val.toFixed(2);
+    if (el) {
+      el.textContent = isPowered ? val.toFixed(2) : '--';
+      el.style.opacity = isPowered ? '1' : '0.4';
+    }
 
-    /* Sidebar mini value */
     const sval = document.getElementById(`sval-${s.id}`);
-    if (sval) sval.textContent = val.toFixed(1);
+    if (sval) {
+      sval.textContent = isPowered ? val.toFixed(1) : '--';
+    }
 
-    /* Progress bar */
     const pct = toPct(val, s.min, s.max);
     const prog = document.getElementById(`prog-${s.id}`);
-    if (prog) prog.style.width = pct + '%';
-    const pctEl = document.getElementById(`pct-${s.id}`);
-    if (pctEl) pctEl.textContent = pct + '% of range';
+    if (prog) prog.style.width = (isPowered ? pct : 0) + '%';
 
-    /* Status pill */
-    const st = getStatus(pct, s.threshPct);
+    const pctEl = document.getElementById(`pct-${s.id}`);
+    if (pctEl) pctEl.textContent = isPowered ? pct + '% of range' : '--';
+
+    const st = isPowered ? getStatus(pct, s.threshPct) : 'ok';
     setPill(s.id, st);
   });
 
-  /* Machine status */
   const statusData = await getMachineStatus(machine).catch(() => null);
   if (!statusData || statusData.message) return;
 
-  const status = statusData.status; // "SAFE" | "WARNING" | "DANGER"
-  const statusKey = status.toLowerCase(); // "safe" | "warning" | "danger"
+  const status = statusData.status;
+  const statusKey = status.toLowerCase();
 
-  /* Topbar status chip */
   const chipVal = document.getElementById('status');
   const chipIndicator = document.getElementById('statusIndicator');
   const chipCard = document.getElementById('topbar-status-card');
@@ -87,13 +89,12 @@ export async function loadDashboard(machine) {
     chipCard.className = 'topbar-status-card ' + statusKey;
   }
 
-  /* Sidebar hint */
   const hintEl = document.getElementById('statusHint');
   if (hintEl) {
     const hints = {
       SAFE:    'All sensors within normal operating range.',
       WARNING: 'One or more sensors approaching threshold.',
-      DANGER:  'Critical readings detected — take action!',
+      DANGER:  'Critical readings detected -- take action!',
     };
     hintEl.textContent = hints[status] || '';
   }

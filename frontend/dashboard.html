@@ -6,6 +6,7 @@
 <title>FactSense Dashboard</title>
 <meta name="description" content="FactSense industrial IoT dashboard — live sensor monitoring and machine control">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="dashboard-body">
@@ -167,6 +168,7 @@
       <div class="sensor-card" id="card-temp" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Temperature</span>
+          <div class="sc-chart-wrap"><canvas id="chart-temp" width="80" height="30"></canvas></div>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="temperature" style="color:#f59e0b; opacity:0.4;">--</span>
@@ -184,6 +186,7 @@
       <div class="sensor-card" id="card-vib" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Vibration</span>
+          <div class="sc-chart-wrap"><canvas id="chart-vib" width="80" height="30"></canvas></div>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="vibration" style="color:#10b981; opacity:0.4;">--</span>
@@ -201,6 +204,7 @@
       <div class="sensor-card" id="card-noise" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Noise Level</span>
+          <div class="sc-chart-wrap"><canvas id="chart-noise" width="80" height="30"></canvas></div>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="noise" style="color:#f97316; opacity:0.4;">--</span>
@@ -218,6 +222,7 @@
       <div class="sensor-card" id="card-gas" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Gas / AQI</span>
+          <div class="sc-chart-wrap"><canvas id="chart-gas" width="80" height="30"></canvas></div>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="gas" style="color:#ef4444; opacity:0.4;">--</span>
@@ -235,6 +240,7 @@
       <div class="sensor-card" id="card-current" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Current</span>
+          <div class="sc-chart-wrap"><canvas id="chart-current" width="80" height="30"></canvas></div>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="current" style="color:#8b5cf6; opacity:0.4;">--</span>
@@ -252,6 +258,7 @@
       <div class="sensor-card" id="card-load" style="opacity: 0.35; filter: grayscale(0.7);">
         <div class="sc-top">
           <span class="sc-name">Load</span>
+          <div class="sc-chart-wrap"><canvas id="chart-load" width="80" height="30"></canvas></div>
         </div>
         <div class="sc-val-row">
           <span class="sc-val" id="load" style="color:#9ca3af; opacity:0.4;">--</span>
@@ -266,6 +273,48 @@
       </div>
 
     </div><!-- /sensor-grid -->
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+      <div class="section-hdr">Sensor Trends</div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <span class="chart-card-title">Danger Zone Overview</span>
+            <span class="chart-card-badge">% of threshold</span>
+          </div>
+          <div class="chart-card-body">
+            <canvas id="dangerChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card donut-grid">
+          <div class="donut-item">
+            <canvas id="donut-temp" width="70" height="70"></canvas>
+            <span class="donut-label">Temp</span>
+          </div>
+          <div class="donut-item">
+            <canvas id="donut-vib" width="70" height="70"></canvas>
+            <span class="donut-label">Vib</span>
+          </div>
+          <div class="donut-item">
+            <canvas id="donut-noise" width="70" height="70"></canvas>
+            <span class="donut-label">Noise</span>
+          </div>
+          <div class="donut-item">
+            <canvas id="donut-gas" width="70" height="70"></canvas>
+            <span class="donut-label">Gas</span>
+          </div>
+          <div class="donut-item">
+            <canvas id="donut-current" width="70" height="70"></canvas>
+            <span class="donut-label">Current</span>
+          </div>
+          <div class="donut-item">
+            <canvas id="donut-load" width="70" height="70"></canvas>
+            <span class="donut-label">Load</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div><!-- /dash-main -->
 

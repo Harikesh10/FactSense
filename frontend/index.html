@@ -13,6 +13,8 @@
 
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <!-- Three.js for 3D scene -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <link rel="stylesheet" href="css/landing.css" />
 </head>
@@ -67,21 +69,25 @@
 
   <div class="hero-inner">
 
-    <!-- LEFT: IIoT Animation -->
+    <!-- LEFT: IIoT Animation with 3D -->
     <div class="hero-left" id="hero-left">
-      <a href="dashboard.html" class="iiot-visual" style="display: block; text-decoration: none; cursor: pointer;">
+      <div class="iiot-visual" id="iiot-visual">
+        <!-- Three.js canvas will render here -->
+        <canvas id="three-canvas"></canvas>
 
-        <!-- Central machine node -->
-        <div class="iiot-core">
-          <div class="core-ring core-ring-1"></div>
-          <div class="core-ring core-ring-2"></div>
-          <div class="core-ring core-ring-3"></div>
-          <div class="core-center">
-            <i data-lucide="cpu" class="core-icon"></i>
-          </div>
+        <!-- Orbital sensor nodes (positioned over canvas) -->
+        <div class="orbit orbit-1"><div class="orbit-node node-temp"><i data-lucide="thermometer" class="node-icon"></i><span class="node-label">TEMP</span><span class="node-val" id="node-temp">72°C</span></div></div>
+        <div class="orbit orbit-2"><div class="orbit-node node-vib"><i data-lucide="activity" class="node-icon"></i><span class="node-label">VIB</span><span class="node-val" id="node-vib">3.2g</span></div></div>
+        <div class="orbit orbit-3"><div class="orbit-node node-gas"><i data-lucide="wind" class="node-icon"></i><span class="node-label">GAS</span><span class="node-val" id="node-gas">82ppm</span></div></div>
+        <div class="orbit orbit-4"><div class="orbit-node node-cur"><i data-lucide="zap" class="node-icon"></i><span class="node-label">CURRENT</span><span class="node-val" id="node-cur">14A</span></div></div>
+        <div class="orbit orbit-5"><div class="orbit-node node-load"><i data-lucide="weight" class="node-icon"></i><span class="node-label">LOAD</span><span class="node-val" id="node-load">25kg</span></div></div>
+
+        <!-- Status ticker -->
+        <div class="status-ticker">
+          <span class="ticker-dot"></span>
+          <span class="ticker-text" id="ticker-text">All systems nominal</span>
         </div>
-
-      </a>
+      </div>
     </div>
 
     <!-- RIGHT: Hero Content -->
@@ -100,6 +106,37 @@
       <p class="hero-sub">
         Real-time visibility into machine Status, operational health, and performance metrics — all in one intelligent dashboard.
       </p>
+
+      <div class="hero-actions">
+        <a href="dashboard.html" class="btn-primary">
+          <i data-lucide="layout-dashboard"></i> Open Dashboard
+        </a>
+        <a href="#features" class="btn-ghost">
+          <i data-lucide="arrow-down"></i> Explore Features
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num" id="stat-machines">3</span>
+          <span class="stat-label">Machines</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" id="stat-sensors">6</span>
+          <span class="stat-label">Sensors</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" id="stat-uptime">99.9</span>
+          <span class="stat-label">Uptime %</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" id="stat-alerts">0</span>
+          <span class="stat-label">Alerts</span>
+        </div>
+      </div>
 
     </div>
 
@@ -137,6 +174,41 @@
       </p>
     </div>
   </div>
+
+  <!-- Sticky notes / highlight cards -->
+  <div class="sticky-board">
+    <div class="sticky-note">
+      <i data-lucide="cpu" class="sticky-icon"></i>
+      <h4>Edge-Ready</h4>
+      <p>Process sensor data at the edge for sub-second response times.</p>
+    </div>
+    <div class="sticky-note">
+      <i data-lucide="cloud" class="sticky-icon"></i>
+      <h4>Cloud Sync</h4>
+      <p>Automatic synchronization with cloud storage for historical analysis.</p>
+    </div>
+    <div class="sticky-note">
+      <i data-lucide="bell" class="sticky-icon"></i>
+      <h4>Smart Alerts</h4>
+      <p>SMS notifications via Twilio when thresholds are exceeded.</p>
+    </div>
+    <div class="sticky-note">
+      <i data-lucide="bar-chart-3" class="sticky-icon"></i>
+      <h4>Live Analytics</h4>
+      <p>Real-time charts with configurable thresholds and trend lines.</p>
+    </div>
+    <div class="sticky-note">
+      <i data-lucide="bot" class="sticky-icon"></i>
+      <h4>AI Predictions</h4>
+      <p>Machine learning models predict failures before they happen.</p>
+    </div>
+    <div class="sticky-note">
+      <i data-lucide="shield" class="sticky-icon"></i>
+      <h4>Secure</h4>
+      <p>End-to-end encryption and role-based access control.</p>
+    </div>
+  </div>
+
 </section>
 
 <!-- ===================== FEATURES ===================== -->
