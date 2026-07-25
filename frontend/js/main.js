@@ -1,12 +1,13 @@
 import { loadDashboard } from './dashboard.js';
-import { createSparkline, createDonut, createDangerChart, updateSparkline, updateDonut, updateDangerChart } from './charts.js';
+import { createSparkline, updateSparkline } from './charts.js';
 import { getSimulatorStatus, startSimulator, stopSimulator, getSensorHistory } from './api.js';
 
 let machine = 'MACHINE_1';
 let sensorHistory = [];
 let historyLabels = [];
 
-/* Sensor power state - exposed for dashboard.js */
+/* Sensor power state - exposed for dashboard.js
+   Restore from localStorage immediately so UI is correct on refresh */
 const sensorPower = {
   temp: true,
   vib: true,
@@ -16,6 +17,71 @@ const sensorPower = {
   load: true,
 };
 window.__sensorPower = sensorPower;
+
+/* Immediately restore sensor power from localStorage */
+function restoreSensorPowerFromStorage() {
+  const ids = ['temp', 'vib', 'noise', 'gas', 'current', 'load'];
+  const simRunning = localStorage.getItem('simulator_running') !== 'false'; // defaults to true if not set
+  
+  ids.forEach(id => {
+    const stored = localStorage.getItem(`sensor_power_${id}`);
+    if (stored !== null) {
+      let isOn = stored === 'true';
+      if (!simRunning) isOn = false; // Override to off if simulator is off
+      
+      sensorPower[id] = isOn;
+      window.__sensorPower[id] = isOn;
+
+      const btn = document.getElementById(`circle-btn-${id}`);
+      const statusEl = document.getElementById(`status-${id}`);
+      if (btn) {
+        btn.classList.toggle('active', isOn);
+        btn.classList.toggle('off', !isOn);
+      }
+      if (statusEl) {
+        statusEl.textContent = isOn ? 'ON' : 'OFF';
+      }
+
+      const card = document.getElementById(`card-${id}`);
+      if (card) {
+        card.style.opacity    = isOn ? '1'    : '0.35';
+        card.style.filter     = isOn ? 'none' : 'grayscale(0.7)';
+        const valEl = card.querySelector('.sc-val');
+        if (valEl) valEl.style.opacity = isOn ? '1' : '0.4';
+      }
+      
+      // Instant UI update for OFF state
+      if (!isOn) {
+        // Clear numerical value
+        const valIds = { temp: 'temperature', vib: 'vibration', noise: 'noise', gas: 'gas', current: 'current', load: 'load' };
+        const valId = valIds[id];
+        if (valId) {
+          const vEl = document.getElementById(valId);
+          if (vEl) vEl.textContent = '--';
+        }
+        
+        // Clear other indicators
+        const pctEl = document.getElementById(`pct-${id}`);
+        if (pctEl) pctEl.textContent = '--';
+        
+        const progEl = document.getElementById(`prog-${id}`);
+        if (progEl) progEl.style.width = '0%';
+        
+        const pillEl = document.getElementById(`pill-${id}`);
+        if (pillEl) {
+          pillEl.textContent = '—';
+          pillEl.className = 'status-pill';
+        }
+        
+        // Clear sparkline immediately
+        if (typeof updateSparkline === 'function') {
+          updateSparkline(`chart-${id}`, [], []);
+        }
+      }
+    }
+  });
+}
+restoreSensorPowerFromStorage();
 
 /* -- CLOCK -- */
 function tickClock() {
@@ -49,25 +115,16 @@ async function pollHistory() {
     historyLabels = sensorHistory.map((_, i) => i);
 
     SENSORS.forEach(s => {
+      const isPowered = sensorPower[s.id] !== false;
       const values = sensorHistory.map(d => d[s.key]).filter(v => v !== undefined);
       if (values.length > 0) {
-        updateSparkline(`chart-${s.id}`, historyLabels.slice(-20), values.slice(-20));
-        const latest = values[values.length - 1];
-        const pct = Math.min(100, Math.max(0, ((latest - s.min) / (s.max - s.min)) * 100));
-        updateDonut(`donut-${s.id}`, Math.round(pct));
+        if (isPowered) {
+          updateSparkline(`chart-${s.id}`, historyLabels.slice(-20), values.slice(-20));
+        } else {
+          updateSparkline(`chart-${s.id}`, [], []);
+        }
       }
     });
-
-    /* Danger chart */
-    const latest = sensorHistory[sensorHistory.length - 1];
-    if (latest) {
-      const pcts = SENSORS.map(s => {
-        const val = latest[s.key];
-        if (val === undefined) return 0;
-        return Math.min(100, Math.max(0, ((val - s.min) / (s.max - s.min)) * 100));
-      });
-      updateDangerChart(pcts);
-    }
   } catch (_) {}
 }
 
@@ -85,9 +142,7 @@ function initCharts() {
   if (typeof Chart === 'undefined') return;
   SENSORS.forEach(s => {
     createSparkline(`chart-${s.id}`, s.color);
-    createDonut(`donut-${s.id}`, s.color);
   });
-  createDangerChart(SENSORS);
   pollHistory();
   setInterval(pollHistory, 5000);
 }
@@ -100,10 +155,15 @@ function setSensorPower(sensor, isOn, save = true) {
   sensorPower[sensor] = isOn;
   window.__sensorPower[sensor] = isOn;
 
-  const onBtn  = document.getElementById(`power-on-${sensor}`);
-  const offBtn = document.getElementById(`power-off-${sensor}`);
-  if (onBtn)  onBtn.classList.toggle('active',  isOn);
-  if (offBtn) offBtn.classList.toggle('active', !isOn);
+  const btn = document.getElementById(`circle-btn-${sensor}`);
+  const statusEl = document.getElementById(`status-${sensor}`);
+  if (btn) {
+    btn.classList.toggle('active', isOn);
+    btn.classList.toggle('off', !isOn);
+  }
+  if (statusEl) {
+    statusEl.textContent = isOn ? 'ON' : 'OFF';
+  }
 
   const card = document.getElementById(`card-${sensor}`);
   if (card) {
@@ -112,6 +172,35 @@ function setSensorPower(sensor, isOn, save = true) {
     card.style.transition = 'opacity 0.3s ease, filter 0.3s ease';
     const valEl = card.querySelector('.sc-val');
     if (valEl) valEl.style.opacity = isOn ? '1' : '0.4';
+  }
+
+  // Instant UI update for OFF state
+  if (!isOn) {
+    // Clear numerical value
+    const valIds = { temp: 'temperature', vib: 'vibration', noise: 'noise', gas: 'gas', current: 'current', load: 'load' };
+    const valId = valIds[sensor];
+    if (valId) {
+      const vEl = document.getElementById(valId);
+      if (vEl) vEl.textContent = '--';
+    }
+    
+    // Clear other indicators
+    const pctEl = document.getElementById(`pct-${sensor}`);
+    if (pctEl) pctEl.textContent = '--';
+    
+    const progEl = document.getElementById(`prog-${sensor}`);
+    if (progEl) progEl.style.width = '0%';
+    
+    const pillEl = document.getElementById(`pill-${sensor}`);
+    if (pillEl) {
+      pillEl.textContent = '—';
+      pillEl.className = 'status-pill';
+    }
+    
+    // Clear sparkline immediately
+    if (typeof updateSparkline === 'function') {
+      updateSparkline(`chart-${sensor}`, [], []);
+    }
   }
 }
 
@@ -131,6 +220,8 @@ async function syncSimulatorState() {
         const stored = localStorage.getItem(`sensor_power_${s.id}`);
         setSensorPower(s.id, stored !== null ? stored === 'true' : true, false);
       });
+    } else {
+      SENSORS.forEach(s => setSensorPower(s.id, false, false));
     }
   } catch (_) {
     simStatus.textContent = 'Backend offline';
@@ -175,13 +266,12 @@ simToggle.addEventListener('change', async () => {
 
 syncSimulatorState();
 
-/* -- SENSOR NAV BUTTONS -- */
-const sensorBtns = document.querySelectorAll('.sensor-btn');
-
-sensorBtns.forEach(btn => {
+/* -- ROUND SENSOR TOGGLE BUTTONS -- */
+document.querySelectorAll('.sensor-circle-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    sensorBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    const sensor = btn.dataset.sensor;
+    const currentState = sensorPower[sensor] !== false;
+    setSensorPower(sensor, !currentState);
 
     const targetId = btn.dataset.target;
     const card = document.getElementById(targetId);
@@ -190,15 +280,6 @@ sensorBtns.forEach(btn => {
       card.classList.add('highlighted');
       setTimeout(() => card.classList.remove('highlighted'), 1500);
     }
-  });
-});
-
-/* -- SIDEBAR SENSOR POWER BUTTONS -- */
-document.querySelectorAll('.spp-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const sensor = btn.dataset.sensor;
-    const isOn   = btn.dataset.action === 'on';
-    setSensorPower(sensor, isOn);
   });
 });
 
