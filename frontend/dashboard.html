@@ -7,6 +7,7 @@
 <meta name="description" content="FactSense industrial IoT dashboard — live sensor monitoring and machine control">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="dashboard-body">
@@ -39,6 +40,12 @@
       </div>
       </div>
     </div>
+
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <i data-lucide="sun" class="theme-icon theme-icon-light"></i>
+      <i data-lucide="moon" class="theme-icon theme-icon-dark"></i>
+    </button>
 
     <a href="index.html" class="back-link">← Home</a>
   </div>
@@ -229,6 +236,10 @@
 
 </div><!-- /page-wrapper -->
 
+<script src="js/theme.js"></script>
 <script type="module" src="js/main.js"></script>
+<script>
+  if (window.lucide) lucide.createIcons();
+</script>
 </body>
 </html>

@@ -13,8 +13,6 @@
 
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <!-- Three.js for 3D scene -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <link rel="stylesheet" href="css/landing.css" />
 </head>
@@ -37,6 +35,12 @@
       <li><a href="#features" class="nav-link"        data-section="features">Features</a></li>
      
     </ul>
+
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <i data-lucide="sun" class="theme-icon theme-icon-light"></i>
+      <i data-lucide="moon" class="theme-icon theme-icon-dark"></i>
+    </button>
 
     <a href="dashboard.html" class="nav-cta" id="nav-dashboard-btn">
       <i data-lucide="layout-dashboard" class="cta-icon"></i>
@@ -69,25 +73,8 @@
 
   <div class="hero-inner">
 
-    <!-- LEFT: IIoT Animation with 3D -->
+    <!-- LEFT: Empty placeholder (animation removed) -->
     <div class="hero-left" id="hero-left">
-      <div class="iiot-visual" id="iiot-visual">
-        <!-- Three.js canvas will render here -->
-        <canvas id="three-canvas"></canvas>
-
-        <!-- Orbital sensor nodes (positioned over canvas) -->
-        <div class="orbit orbit-1"><div class="orbit-node node-temp"><i data-lucide="thermometer" class="node-icon"></i><span class="node-label">TEMP</span><span class="node-val" id="node-temp">72°C</span></div></div>
-        <div class="orbit orbit-2"><div class="orbit-node node-vib"><i data-lucide="activity" class="node-icon"></i><span class="node-label">VIB</span><span class="node-val" id="node-vib">3.2g</span></div></div>
-        <div class="orbit orbit-3"><div class="orbit-node node-gas"><i data-lucide="wind" class="node-icon"></i><span class="node-label">GAS</span><span class="node-val" id="node-gas">82ppm</span></div></div>
-        <div class="orbit orbit-4"><div class="orbit-node node-cur"><i data-lucide="zap" class="node-icon"></i><span class="node-label">CURRENT</span><span class="node-val" id="node-cur">14A</span></div></div>
-        <div class="orbit orbit-5"><div class="orbit-node node-load"><i data-lucide="weight" class="node-icon"></i><span class="node-label">LOAD</span><span class="node-val" id="node-load">25kg</span></div></div>
-
-        <!-- Status ticker -->
-        <div class="status-ticker">
-          <span class="ticker-dot"></span>
-          <span class="ticker-text" id="ticker-text">All systems nominal</span>
-        </div>
-      </div>
     </div>
 
     <!-- RIGHT: Hero Content -->
@@ -317,6 +304,7 @@
   </div>
 </footer>
 
+<script src="js/theme.js"></script>
 <script src="js/landing.js"></script>
 <script>
   // Init Lucide icons

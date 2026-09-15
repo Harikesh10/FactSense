@@ -104,7 +104,7 @@ async function poll() {
   await loadDashboard(machine);
 }
 poll();
-setInterval(poll, 5000);
+setInterval(poll, 500);
 
 /* -- HISTORY POLLING for charts -- */
 async function pollHistory() {
@@ -144,7 +144,7 @@ function initCharts() {
     createSparkline(`chart-${s.id}`, s.color);
   });
   pollHistory();
-  setInterval(pollHistory, 5000);
+  setInterval(pollHistory, 500);
 }
 
 /* -- SENSOR POWER CONTROL FUNCTION -- */
@@ -236,7 +236,7 @@ function updateSimUI(running) {
   simLabel.textContent = running ? 'ON' : 'OFF';
   simLabel.classList.toggle('on', running);
   simStatus.textContent = running
-    ? 'Simulator running -- sending data every 5 s'
+    ? 'Simulator running -- sending data every 0.5 s'
     : 'Simulator idle';
 }
 

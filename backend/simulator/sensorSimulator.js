@@ -76,7 +76,7 @@ async function sendSensorData() {
 
 }
 
-setInterval(sendSensorData, 5000);
+setInterval(sendSensorData, 500);
 
 
 // change machine state every 30 seconds

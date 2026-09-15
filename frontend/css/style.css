@@ -7,6 +7,117 @@
     box-sizing: border-box;
 }
 
+/* ---- Dashboard Theme Variables ---- */
+:root {
+    --dash-bg: #1c1c1e;
+    --dash-surface: #2a2a2c;
+    --dash-surface-2: #242426;
+    --dash-surface-3: #333335;
+    --dash-surface-deep: #1c1c22;
+    --dash-surface-deepest: #141417;
+    --dash-text: #f0f2f7;
+    --dash-text-2: rgba(255, 255, 255, 0.6);
+    --dash-text-3: rgba(255, 255, 255, 0.35);
+    --dash-text-4: rgba(255, 255, 255, 0.25);
+    --dash-text-5: rgba(255, 255, 255, 0.3);
+    --dash-border: rgba(255, 255, 255, 0.08);
+    --dash-border-2: rgba(255, 255, 255, 0.1);
+    --dash-border-3: rgba(255, 255, 255, 0.15);
+    --dash-border-4: rgba(255, 255, 255, 0.07);
+    --dash-card-grad-1: #2a2a2c;
+    --dash-card-grad-2: #222224;
+    --dash-card-shadow: rgba(0, 0, 0, 0.35);
+    --dash-card-hover-shadow: rgba(0, 0, 0, 0.5);
+    --dash-card-glow: rgba(255, 255, 255, 0.06);
+    --dash-card-hover-border: rgba(255, 255, 255, 0.25);
+    --dash-prog-track: rgba(255, 255, 255, 0.07);
+    --dash-prog-text: rgba(255, 255, 255, 0.22);
+    --dash-toggle-bg: rgba(255, 255, 255, 0.08);
+    --dash-toggle-hover: rgba(255, 255, 255, 0.14);
+    --dash-glass: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="light"] {
+    --dash-bg: #f4f5f7;
+    --dash-surface: #ffffff;
+    --dash-surface-2: #f9fafb;
+    --dash-surface-3: #f0f1f3;
+    --dash-surface-deep: #edeef0;
+    --dash-surface-deepest: #e5e7eb;
+    --dash-text: #1a1d26;
+    --dash-text-2: rgba(26, 29, 38, 0.6);
+    --dash-text-3: rgba(26, 29, 38, 0.4);
+    --dash-text-4: rgba(26, 29, 38, 0.3);
+    --dash-text-5: rgba(26, 29, 38, 0.35);
+    --dash-border: rgba(0, 0, 0, 0.08);
+    --dash-border-2: rgba(0, 0, 0, 0.1);
+    --dash-border-3: rgba(0, 0, 0, 0.12);
+    --dash-border-4: rgba(0, 0, 0, 0.06);
+    --dash-card-grad-1: #ffffff;
+    --dash-card-grad-2: #fafbfc;
+    --dash-card-shadow: rgba(0, 0, 0, 0.08);
+    --dash-card-hover-shadow: rgba(0, 0, 0, 0.15);
+    --dash-card-glow: rgba(0, 0, 0, 0.03);
+    --dash-card-hover-border: rgba(0, 0, 0, 0.2);
+    --dash-prog-track: rgba(0, 0, 0, 0.08);
+    --dash-prog-text: rgba(0, 0, 0, 0.3);
+    --dash-toggle-bg: rgba(0, 0, 0, 0.06);
+    --dash-toggle-hover: rgba(0, 0, 0, 0.1);
+    --dash-glass: rgba(0, 0, 0, 0.04);
+}
+
+/* ---- Theme Toggle (Dashboard) ---- */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid var(--dash-border-3);
+    background: var(--dash-toggle-bg);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    background: var(--dash-toggle-hover);
+    transform: scale(1.08);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--dash-text-3);
+    transition: color 0.2s;
+}
+
+.theme-icon-dark {
+    display: none;
+}
+
+/* Default (dark theme) shows moon, hides sun */
+.theme-icon-light {
+    display: none;
+}
+
+.theme-icon-dark {
+    display: block;
+}
+
+[data-theme="light"] .theme-icon-light {
+    display: block;
+}
+
+[data-theme="light"] .theme-icon-dark {
+    display: none;
+}
+
 body {
     font-family: "Inter", "Segoe UI", sans-serif;
     background: #ffffff;
@@ -83,8 +194,8 @@ body {
    DASHBOARD BODY
    ============================================================ */
 .dashboard-body {
-    background: #1c1c1e;
-    color: #f0f2f7;
+    background: var(--dash-bg);
+    color: var(--dash-text);
     font-family: "Inter", sans-serif;
     min-height: 100vh;
     display: flex;
@@ -97,8 +208,8 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 12px 24px;
-    background: #2a2a2c;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--dash-surface);
+    border-bottom: 1px solid var(--dash-border);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -133,11 +244,11 @@ body {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.06em;
-    color: #f0f2f7;
+    color: var(--dash-text);
 }
 
 .brand-slash {
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--dash-text-4);
     font-weight: 400;
 }
 
@@ -187,26 +298,26 @@ body {
 .clock-mono {
     font-family: "JetBrains Mono", monospace;
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--dash-text-3);
     white-space: nowrap;
 }
 
 .back-link {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--dash-text-3);
     text-decoration: none;
     transition: color 0.2s;
     white-space: nowrap;
 }
 
 .back-link:hover {
-    color: #f0f2f7;
+    color: var(--dash-text);
 }
 
 .machine-select {
-    background: #333335;
-    color: #f0f2f7;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--dash-surface-3);
+    color: var(--dash-text);
+    border: 1px solid var(--dash-border-3);
     border-radius: 8px;
     padding: 6px 14px;
     font-size: 13px;
@@ -216,7 +327,7 @@ body {
 }
 
 .machine-select:focus {
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--dash-card-hover-border);
 }
 
 /* ---- TOPBAR MACHINE STATUS CHIP ---- */
@@ -224,8 +335,8 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #333335;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--dash-surface-3);
+    border: 1px solid var(--dash-border-2);
     border-radius: 12px;
     padding: 8px 14px;
     min-width: 180px;
@@ -248,7 +359,7 @@ body {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--dash-border-3);
     flex-shrink: 0;
     transition: background 0.4s, box-shadow 0.4s;
 }
@@ -278,7 +389,7 @@ body {
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--dash-text-5);
     margin-bottom: 2px;
 }
 
@@ -286,7 +397,7 @@ body {
     font-family: "JetBrains Mono", monospace;
     font-size: 13px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--dash-text-3);
     transition: color 0.3s;
 }
 
@@ -332,8 +443,8 @@ body {
 .sidebar {
     width: 220px;
     flex-shrink: 0;
-    background: #242426;
-    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    background: var(--dash-surface-2);
+    border-right: 1px solid var(--dash-border-4);
     display: flex;
     flex-direction: column;
     padding: 20px 0;
@@ -349,14 +460,14 @@ body {
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--dash-text-4);
     margin-bottom: 12px;
     font-family: "JetBrains Mono", monospace;
 }
 
 .sidebar-divider {
     height: 1px;
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--dash-border-4);
     margin: 0 16px 20px;
 }
 
@@ -376,7 +487,7 @@ body {
     font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--dash-text-3);
     transition: color 0.3s;
 }
 
@@ -399,11 +510,11 @@ body {
     display: block;
     width: 44px;
     height: 24px;
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--dash-border-2);
     border-radius: 12px;
     position: relative;
     transition: background 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--dash-border-2);
 }
 
 .toggle-switch input:checked+.toggle-track {
@@ -429,7 +540,7 @@ body {
 
 .sim-status-text {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--dash-text-4);
     font-style: italic;
     line-height: 1.4;
 }
@@ -447,7 +558,7 @@ body {
     width: 58px;
     height: 58px;
     border-radius: 50%;
-    background: #1c1c22;
+    background: var(--dash-surface-deep);
     border: none;
     display: flex;
     flex-direction: column;
@@ -472,7 +583,7 @@ body {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--dash-text-2);
     line-height: 1.1;
 }
 
@@ -528,16 +639,16 @@ body {
 
 /* OFF state for all round buttons */
 .sensor-circle-btn.off {
-    background: #141417;
+    background: var(--dash-surface-deepest);
     opacity: 0.55;
 }
-.sensor-circle-btn.off .scb-label { color: rgba(255, 255, 255, 0.3); }
+.sensor-circle-btn.off .scb-label { color: var(--dash-text-5); }
 .sensor-circle-btn.off .scb-status { color: #ef4444; }
 
 /* ---- STATUS HINT IN SIDEBAR ---- */
 .status-hint-side {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--dash-text-5);
     line-height: 1.6;
     font-style: italic;
 }
@@ -557,7 +668,7 @@ body {
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--dash-text-5);
     margin: 0 0 24px;
     display: flex;
     align-items: center;
@@ -568,7 +679,7 @@ body {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--dash-border-4);
 }
 
 /* ---- SENSOR GRID ---- */
@@ -579,18 +690,18 @@ body {
 }
 
 .sensor-card {
-    background: #2a2a2c;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--dash-surface);
+    border: 1px solid var(--dash-border-2);
     border-radius: 16px;
     padding: 24px;
     position: relative;
     overflow: hidden;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s, box-shadow 0.4s;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 20px var(--dash-card-shadow);
     perspective: 800px;
     transform-style: preserve-3d;
     backdrop-filter: blur(4px);
-    background: linear-gradient(145deg, #2a2a2c, #222224);
+    background: linear-gradient(145deg, var(--dash-card-grad-1), var(--dash-card-grad-2));
 }
 
 .sensor-card::after {
@@ -598,7 +709,7 @@ body {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     border-radius: 16px;
-    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06) 0%, transparent 60%);
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--dash-card-glow) 0%, transparent 60%);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s;
@@ -606,8 +717,8 @@ body {
 
 .sensor-card:hover {
     transform: translateY(-8px) rotateX(2deg) scale(1.02);
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border-color: var(--dash-card-hover-border);
+    box-shadow: 0 20px 40px var(--dash-card-hover-shadow);
 }
 
 .sensor-card:hover::after {
@@ -649,7 +760,7 @@ body {
 }
 
 .sensor-card.highlighted {
-    outline: 2px solid rgba(255, 255, 255, 0.3);
+    outline: 2px solid var(--dash-card-hover-border);
     outline-offset: 2px;
 }
 
@@ -665,7 +776,7 @@ body {
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--dash-text-3);
 }
 
 .sc-icon {
@@ -688,7 +799,7 @@ body {
 
 .sc-unit {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--dash-text-3);
     align-self: flex-end;
     padding-bottom: 6px;
 }
@@ -702,7 +813,7 @@ body {
 
 .sc-thresh {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--dash-text-4);
 }
 
 .status-pill {
@@ -733,14 +844,14 @@ body {
 }
 
 .pill-none {
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--dash-glass);
+    color: var(--dash-text-5);
+    border: 1px solid var(--dash-border-2);
 }
 
 .prog-track {
     height: 5px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--dash-prog-track);
     border-radius: 4px;
     overflow: hidden;
     margin-bottom: 6px;
@@ -756,7 +867,7 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.22);
+    color: var(--dash-prog-text);
     font-family: "JetBrains Mono", monospace;
 }
 
@@ -781,13 +892,13 @@ body {
 
 /* ---- GLASS CARD (compat) ---- */
 .glass-card {
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--dash-glass);
     backdrop-filter: blur(10px);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 16px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--dash-border-2);
 }
 
 /* ---- OLD STATUS LIGHT (compat) ---- */
